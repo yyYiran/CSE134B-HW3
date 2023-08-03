@@ -255,10 +255,12 @@ function basicClone(){
 }
 
 function advancedClone(){
+    const timestamp = new Date().toLocaleString();
     const output = document.getElementById("output5");
     const clone = document.querySelector("template").content.cloneNode(true);
-    
     output.appendChild(clone);
+    output.lastElementChild.querySelector("h4").textContent = `Card ${Math.floor(Math.random() * 100)}`;
+    output.lastElementChild.querySelector("p").textContent = `Created @ ${timestamp}`;
 }
 
 
