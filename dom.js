@@ -42,6 +42,11 @@ function init() {
     element.addEventListener('click', function () {
         safeDelete();
     });
+
+    element = document.getElementById('deleteBySelector');
+    element.addEventListener('click', function () {
+        deleteBySelector();
+    });
 }
 
 function walk() {
@@ -209,5 +214,19 @@ function safeDelete(){
         toDelete = previousSibling;
     }
 }
+
+function deleteBySelector(){
+    const selector = document.getElementById("selector").value; 
+    if (selector){
+        const elsToDelete = document.querySelectorAll(selector);
+
+        for (const el of elsToDelete) {
+            el.parentNode.removeChild(el);
+        }
+    }
+    
+}
+
+
 
 window.addEventListener('DOMContentLoaded', init);
