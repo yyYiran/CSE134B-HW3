@@ -57,6 +57,13 @@ function init() {
     element.addEventListener('click', function () {
         clear();
     });
+
+    element = document.getElementById('advancedClone');
+    element.addEventListener('click', function () {
+        advancedClone();
+    });
+
+
 }
 
 function walk() {
@@ -242,8 +249,15 @@ function clear (){
 function basicClone(){
     const output = document.getElementById("output5");
     const clone = document.getElementById("p1").cloneNode(true);
-    clone.id = ''
+    clone.removeAttribute('id');
 
+    output.appendChild(clone);
+}
+
+function advancedClone(){
+    const output = document.getElementById("output5");
+    const clone = document.querySelector("template").content.cloneNode(true);
+    
     output.appendChild(clone);
 }
 
