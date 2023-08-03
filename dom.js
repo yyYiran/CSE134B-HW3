@@ -47,6 +47,16 @@ function init() {
     element.addEventListener('click', function () {
         deleteBySelector();
     });
+
+    element = document.getElementById('basicClone');
+    element.addEventListener('click', function () {
+        basicClone();
+    });
+
+    element = document.getElementById('clear');
+    element.addEventListener('click', function () {
+        clear();
+    });
 }
 
 function walk() {
@@ -223,10 +233,19 @@ function deleteBySelector(){
         for (const el of elsToDelete) {
             el.parentNode.removeChild(el);
         }
-    }
-    
+    }   
 }
 
+function clear (){
+    document.getElementById("output5").textContent = ""
+}
+function basicClone(){
+    const output = document.getElementById("output5");
+    const clone = document.getElementById("p1").cloneNode(true);
+    clone.id = ''
+
+    output.appendChild(clone);
+}
 
 
 window.addEventListener('DOMContentLoaded', init);
