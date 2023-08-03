@@ -1,9 +1,16 @@
 /* dom.js */
 
+let output1 = document.getElementById("q1")
+
 function init() {
     let element = document.getElementById('walkBtn');
     element.addEventListener('click', function () {
         walk();
+    });
+
+    element = document.getElementById('advancedWalkBtn');
+    element.addEventListener('click', function () {
+        advancedWalk();
     });
 
     element = document.getElementById('modifyBtn');
@@ -11,19 +18,36 @@ function init() {
         modify();
     });
 
+    element = document.getElementById('advancedModifyBtn');
+    element.addEventListener('click', function () {
+        advancedModifyBtn();
+    });
+
     element = document.getElementById('addBtn');
     element.addEventListener('click', function () {
         add();
+    });
+
+    element = document.getElementById('advancedAddBtn');
+    element.addEventListener('click', ()=>{
+        advancedAdd()
     });
 
     element = document.getElementById('removeBtn');
     element.addEventListener('click', function () {
         remove();
     });
+
+    element = document.getElementById('safeDeleteBtn');
+    element.addEventListener('click', function () {
+        safeDelete();
+    });
 }
 
 function walk() {
    let el;
+
+   output1.value = ''
 
    el = document.getElementById('p1');
    showNode(el);
@@ -43,7 +67,28 @@ function walk() {
    el = el.querySelector('section > *');
    showNode(el);
 
+}
 
+function advancedWalk(){
+    const root = document.documentElement;
+    const DOMtree = traverseFrom(root, 0);
+    output1.value = DOMtree; 
+}
+
+function traverseFrom(el, level) {
+    let prefix = '';
+    for (let i = 0; i < level; i++) {
+      prefix += '---|';
+    }
+
+    const nodeName = el.nodeName;
+    let DOMtree = `${prefix}${nodeName}`;
+
+    for (const childNode of el.childNodes) {
+      DOMtree += `\n${traverseFrom(childNode, level + 1)}`;
+    }
+
+    return DOMtree;
 }
 
 function showNode(el) {
@@ -51,7 +96,8 @@ function showNode(el) {
     let nodeName = el.nodeName;
     let nodeValue = el.nodeValue;
 
-    alert(`Node type: ${nodeType}\nNode name: ${nodeName}\nNode value: ${nodeValue}`);
+    output1.value += `Node type: ${nodeType}\nNode name: ${nodeName}\nNode value: ${nodeValue}\n\n`
+    // alert(`Node type: ${nodeType}\nNode name: ${nodeName}\nNode value: ${nodeValue}`);
 }
 
 function modify() {
@@ -76,6 +122,21 @@ function modify() {
     el.dataset.coolFactor = '9000'; //data-cool-factor="9000"
 
 }
+
+function advancedModifyBtn(){
+    let h1 = document.querySelector("h1");
+    h1.innerHTML = "DOM Manipulation is Fun!"
+
+    let i = Math.floor(Math.random() * 6) + 1;
+    h1.style.color = `var(--darkcolor${i})`
+
+    const ps = document.querySelectorAll("p");
+    for (const p of ps){
+        p.classList.toggle("shmancy")
+    }
+}
+
+
 
 function add() {
 
@@ -103,8 +164,46 @@ function add() {
     // clearly short hands are pretty easy!
 }
 
+function advancedAdd(){
+    const timestamp = new Date().toLocaleString();
+    const output = document.getElementById("output3")
+    output.textContent = ''
+    const type = document.getElementById("type").value; 
+    const tag = document.getElementById("tag").value.toLowerCase(); 
+    const content = document.getElementById("content").value; 
+    // console.log(tag)
+    let newElement;
+    if (type == "Text Node"){
+        newElement = document.createTextNode("New Text Node " + timestamp);
+    } else if (type == "Comment"){
+        newElement = document.createComment("New Comment " + timestamp);
+    } else if (type == "Element"){
+        if (tag){
+            newElement = document.createElement(tag);
+            newElement.textContent = "New Element "  + timestamp;
+        }
+    }
+
+    if (newElement){
+        output.appendChild(newElement);
+        newElement.textContent = content + " " + timestamp;
+    } else{
+        output.innerText = "Invalid input"
+    }
+}
+
 function remove() {
   document.body.removeChild(document.body.lastChild);
+}
+
+function safeDelete(){
+    let toDelete = document.body.lastChild;
+    let democontrol = document.getElementById("controls");
+    while (toDelete && toDelete !== democontrol){
+        let previousSibling = toDelete.previousSibling
+        document.body.removeChild(toDelete)
+        toDelete = previousSibling;
+    }
 }
 
 window.addEventListener('DOMContentLoaded', init);

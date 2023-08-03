@@ -59,6 +59,31 @@
             75% {background: #ffd97d;}
             100% {background: #ff9b85;}
         }
+
+        #q1{
+            resize: none;
+            width: 80%;
+            height: 400px;
+        }
+
+        .shmancy{
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            color: red !important;
+            animation: typewriter 5s steps(20, end);
+        }
+
+        @keyframes typewriter {
+            from {width: 0;}
+            to {width: 100%;}
+          }
+
+        #output3{
+            border: 1px solid blue;
+            padding: 1px 50px;
+            
+        }
     </style>
 </head>
 <body>
@@ -74,6 +99,12 @@
         <label for="walkBtn">Basic Traversal</label>
         <input type="button" id="walkBtn" value="Walk">
 
+        <label for="advancedWalkBtn">Advanced Traversal</label>
+        <input type="button" id="advancedWalkBtn" value="Advanced Walk">
+
+        <hr>
+        <textarea id="q1" ></textarea>
+
         <!--
             Q1a) Modify the simple walk button example to not use alerts but instead to print out the node information on the page in a <textarea> within this fieldset. Using appropriate spacing or returns, so we can see each step
 
@@ -88,6 +119,8 @@
         <legend>Modify</legend>
         <label for="modifyBtn">Simple Modification</label>
         <input type="button" id="modifyBtn" value="Modify">
+        <label for="advancedModifyBtn">Advanced Modification</label>
+        <input type="button" id="advancedModifyBtn" value="Advanced Modify">
 
         <!--
             Q2) Add a new button "Advanced Modify" that does the following:
@@ -104,8 +137,23 @@
 
         <!--
             Q3) Add a select menu that allows you to add a new element to the DOM.  The select menu should have the following options: Text Node, Comment, and Element. When you select one of these options and click the button, the appropriate element should be added to the DOM.  You may want to define an output tag to put the newly created elements in it and style it in a fashion with a border or background color, so you can tell it is new content.  You will need a corresponding text field to define the contents of the text node, comment text, or tag name you want to insert.  By default set the text of any added element to say "New Element" or "New Comment" or "New Text Node" depending on the type of element you are adding but add in the current date and time using a JS Date object.  You can use the toLocaleString() method to get a nicely formatted date and time string.
-
         -->
+        <hr>
+        
+        <label for="advancedAddBtn">Advanced Add</label>
+        <input type="button" id="advancedAddBtn" value="Advanced Add">
+        <label for="type">Type</label>
+        <select id="type" name="type">
+            <option value="Text Node">Text Node</option>
+            <option value="Comment">Comment</option>
+            <option value="Element">Element</option>
+        </select>
+        <label for="content">Content</label>
+        <input type="text" name="content" id="content">
+        <label for="tag">Tag</label>
+        <input type="text" name="tag" id="tag">
+        <br>
+        <output id="output3"> </output>
     </fieldset>
 
     <fieldset>
@@ -120,6 +168,9 @@
           Q4b) Delete by selector
             add a text field and a button to the fieldset that allows you to type a CSS selector and then delete all the elements that match that selector.
         -->
+        <hr>
+        <label for="safeDeleteBtn">Safe delete</label>
+        <input type="button" id="safeDeleteBtn" value="Safe delete">
     </fieldset>
 
     <fieldset>
