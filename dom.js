@@ -199,9 +199,13 @@ function remove() {
 function safeDelete(){
     let toDelete = document.body.lastChild;
     let democontrol = document.getElementById("controls");
-    while (toDelete && toDelete !== democontrol){
+    while (toDelete != null){
+       
+        console.log(toDelete)
         let previousSibling = toDelete.previousSibling
-        document.body.removeChild(toDelete)
+        if (toDelete !== democontrol){
+            document.body.removeChild(toDelete)
+        }
         toDelete = previousSibling;
     }
 }
